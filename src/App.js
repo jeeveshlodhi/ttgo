@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class ToggleKnob extends React.Component {
+  render() {
+    return (
+      <span
+        className={`toggleKnob 
+                    ${this.props.isOn ?
+            "isActive" : ""}`}
+      >
+      </span>
+    );
+  }
 }
 
-export default App;
+class ToggleButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOn: false
+    }
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isOn: !prevState.isOn
+    }));
+    console.log(this.state.isOn);
+  }
+
+  render() {
+    return (
+      <button className={`toggleContainer ${this.state.isOn ? "isActive" : ""}`}
+        onClick={() => this.handleClick()}
+      >
+        <ToggleKnob isOn={this.state.isOn} />
+      </button>
+    )
+  }
+}
+
+export default ToggleButton;

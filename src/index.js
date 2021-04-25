@@ -4,6 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const functions = require('firebase-functions');
+const app = require('express')();
+
+const {
+    getAllTodos
+} = require('./APIs/todos')
+
+app.get('/todos', getAllTodos);
+exports.api = functions.https.onRequest(app);
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -15,3 +25,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
